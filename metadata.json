@@ -1,0 +1,7 @@
+{
+  "name": "CX SONIC ANALYZER",
+  "description": "Professional audio analysis tool that detects reverb characteristics and EQ profiles from live audio input.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
