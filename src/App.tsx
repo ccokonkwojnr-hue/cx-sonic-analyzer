@@ -930,7 +930,7 @@ export default function App() {
             type="file" 
             ref={fileInputRef} 
             onChange={handleFileUpload} 
-            accept="audio/*" 
+            accept="audio/*,.mp3,.wav,.m4a,.flac,.aac,.ogg" 
             className="hidden" 
           />
           <button 
