@@ -282,7 +282,7 @@ const ReverbVisualizer = ({ data, filters }: { data: AudioAnalysis['reverbVisual
       </div>
       
       <div className="relative z-10 space-y-6">
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
           {[
             { label: 'Density', val: data.density },
             { label: 'Diffusion', val: data.diffusion },
@@ -407,34 +407,34 @@ const MatchEqCurve = ({ profile }: { profile: AudioAnalysis['eqProfile'] }) => {
       </div>
       
       {/* Legend - Interactive */}
-      <div className="absolute bottom-2 right-3 flex gap-3 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-full border border-white/5">
+      <div className="absolute bottom-2 right-2 sm:right-3 flex flex-wrap justify-end gap-2 sm:gap-3 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-full border border-white/5 max-w-[80%]">
         <button 
           onClick={() => toggleCurve('main')}
-          className={cn("flex items-center gap-1.5 transition-opacity", !visibleCurves.main && "opacity-30")}
+          className={cn("flex items-center gap-1 sm:gap-1.5 transition-opacity", !visibleCurves.main && "opacity-30")}
         >
-          <div className="w-2 h-2 rounded-full bg-[#4ade80] shadow-[0_0_4px_#4ade80]" />
-          <span className="text-[7px] font-bold text-white uppercase tracking-tighter">Main</span>
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#4ade80] shadow-[0_0_4px_#4ade80]" />
+          <span className="text-[6px] sm:text-[7px] font-bold text-white uppercase tracking-tighter">Main</span>
         </button>
         <button 
           onClick={() => toggleCurve('verb')}
-          className={cn("flex items-center gap-1.5 transition-opacity", !visibleCurves.verb && "opacity-30")}
+          className={cn("flex items-center gap-1 sm:gap-1.5 transition-opacity", !visibleCurves.verb && "opacity-30")}
         >
-          <div className="w-2 h-2 rounded-full bg-[#a855f7] shadow-[0_0_4px_#a855f7]" />
-          <span className="text-[7px] font-bold text-white uppercase tracking-tighter">Verb</span>
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#a855f7] shadow-[0_0_4px_#a855f7]" />
+          <span className="text-[6px] sm:text-[7px] font-bold text-white uppercase tracking-tighter">Verb</span>
         </button>
         <button 
           onClick={() => toggleCurve('delay')}
-          className={cn("flex items-center gap-1.5 transition-opacity", !visibleCurves.delay && "opacity-30")}
+          className={cn("flex items-center gap-1 sm:gap-1.5 transition-opacity", !visibleCurves.delay && "opacity-30")}
         >
-          <div className="w-2 h-2 rounded-full bg-[#14b8a6] shadow-[0_0_4px_#14b8a6]" />
-          <span className="text-[7px] font-bold text-white uppercase tracking-tighter">Delay</span>
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#14b8a6] shadow-[0_0_4px_#14b8a6]" />
+          <span className="text-[6px] sm:text-[7px] font-bold text-white uppercase tracking-tighter">Delay</span>
         </button>
         <button 
           onClick={() => toggleCurve('sat')}
-          className={cn("flex items-center gap-1.5 transition-opacity", !visibleCurves.sat && "opacity-30")}
+          className={cn("flex items-center gap-1 sm:gap-1.5 transition-opacity", !visibleCurves.sat && "opacity-30")}
         >
-          <div className="w-2 h-2 rounded-full bg-[#78350f] shadow-[0_0_4px_#78350f]" />
-          <span className="text-[7px] font-bold text-white uppercase tracking-tighter">Sat</span>
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#78350f] shadow-[0_0_4px_#78350f]" />
+          <span className="text-[6px] sm:text-[7px] font-bold text-white uppercase tracking-tighter">Sat</span>
         </button>
       </div>
     </div>
@@ -803,7 +803,7 @@ export default function App() {
       }
     } catch (err: any) {
       console.error(err);
-      setError("Analysis failed. Please try again.");
+      setError(err.message || "Analysis failed. Please try again.");
     } finally {
       setIsAnalyzing(false);
     }
@@ -1134,11 +1134,13 @@ export default function App() {
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm flex items-center gap-3"
+              className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm flex flex-col sm:flex-row items-start sm:items-center gap-3"
             >
-              <Info className="w-5 h-5" />
-              {error}
-              <button onClick={() => setError(null)} className="ml-auto text-xs underline">Dismiss</button>
+              <div className="flex items-start sm:items-center gap-3 flex-1">
+                <Info className="w-5 h-5 shrink-0 mt-0.5 sm:mt-0" />
+                <span className="break-words">{error}</span>
+              </div>
+              <button onClick={() => setError(null)} className="text-xs underline shrink-0 sm:ml-auto mt-2 sm:mt-0 self-end sm:self-auto">Dismiss</button>
             </motion.div>
           )}
 
